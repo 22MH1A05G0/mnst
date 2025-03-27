@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theatre Ticket Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 10px 0;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Theatre Ticket Booking System</h2>
+
+    <label for="seats">Enter number of seats to book (1 to 5):</label><br>
+    <input type="number" id="seats" min="1" max="5">
+    <button onclick="calculateCost()">Book Tickets</button>
+
+    <div id="result"></div>
+
+    <script>
+        // Arrow function to calculate discount based on number of seats
+        const calculateDiscount = (seats) => {
+            const discountRates = [5, 7, 9]; // For seats 3, 4, 5 respectively
+            return discountRates[seats - 3] || 0; // Returns 0 if no discount
+        };
+
+        // Function to calculate and display total cost
+        function calculateCost() {
+            const seats = parseInt(document.getElementById("seats").value);
+            const pricePerTicket = 9;
+            const resultDiv = document.getElementById("result");
+
+            if (isNaN(seats) || seats <= 0) {
+                resultDiv.innerHTML = "❌ Please enter a valid number of seats.";
+                return;
+            }
+
+            if (seats <= 2) {
+                const total = seats * pricePerTicket;
+                resultDiv.innerHTML = `✅ Total cost for ${seats} ticket(s): $${total}`;
+            } else if (seats >= 6) {
+                resultDiv.innerHTML = "❌ Booking not allowed for 6 or more seats.";
+            } else {
+                // For seats 3, 4, 5
+                const discountPercent = calculateDiscount(seats);
+                const total = seats * pricePerTicket;
+                const discountAmount = (total * discountPercent) / 100;
+                const finalAmount = total - discountAmount;
+
+                resultDiv.innerHTML = `
+                    🧾 Total before discount: $${total}<br>
+                    🎉 Discount applied: ${discountPercent}% ($${discountAmount.toFixed(2)})<br>
+                    ✅ Final total cost for ${seats} ticket(s): $${finalAmount.toFixed(2)}
+                `;
+            }
+        }
+    </script>
+
+</body>
+</html>
