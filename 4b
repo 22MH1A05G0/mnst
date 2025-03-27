@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 300px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 320px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Enter Employee Details</h2>
+    <input type="text" id="name" placeholder="Enter Name"><br>
+    <input type="number" id="age" placeholder="Enter Age"><br>
+    <input type="text" id="role" placeholder="Enter Role"><br>
+    <input type="text" id="contact" placeholder="Enter Contact Email or Phone"><br>
+    <button onclick="submitEmployee()">Submit</button>
+
+    <div id="output"></div>
+
+    <script>
+        // Base class: Person
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+
+        // Derived class: Employee
+        class Employee extends Person {
+            constructor(name, age, role, contact) {
+                super(name, age); // Call parent class constructor
+                this.role = role;
+                this.contact = contact;
+            }
+
+            // Method to return formatted details
+            getDetails() {
+                return `
+                    <strong>Employee Details:</strong><br>
+                    Name: ${this.name}<br>
+                    Age: ${this.age}<br>
+                    Role: ${this.role}<br>
+                    Contact: ${this.contact}
+                `;
+            }
+        }
+
+        // Function to collect input, create object and display result
+        function submitEmployee() {
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const role = document.getElementById("role").value;
+            const contact = document.getElementById("contact").value;
+
+            if (!name || !age || !role || !contact) {
+                document.getElementById("output").innerHTML = "❌ Please fill in all fields.";
+                return;
+            }
+
+            const emp = new Employee(name, parseInt(age), role, contact);
+            document.getElementById("output").innerHTML = emp.getDetails();
+        }
+    </script>
+
+</body>
+</html>
