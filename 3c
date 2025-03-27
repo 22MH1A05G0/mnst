@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Ticket Booking</title>
+</head>
+<body>
+
+  <h2>Book Movie Tickets</h2>
+
+  <p id="bookingDetails"></p>
+
+  <script>
+    // Step 1: Inputs
+    const numberOfTickets = 4;       // Change this value to test with different number of tickets
+    const pricePerTicket = 150;
+
+    // Step 2: Calculate total price before discount
+    const totalPrice = numberOfTickets * pricePerTicket;
+
+    // Step 3: Apply festive discount of 10%
+    const discountRate = 0.10;
+    const discountAmount = totalPrice * discountRate;
+
+    // Step 4: Final amount after discount
+    const finalAmount = totalPrice - discountAmount;
+
+    // Step 5: Display the results using template literals
+    const bookingInfo = `
+      <strong>Number of Tickets:</strong> ${numberOfTickets} <br>
+      <strong>Price per Ticket:</strong> Rs. ${pricePerTicket} <br>
+      <strong>Total Price:</strong> Rs. ${totalPrice} <br>
+      <strong>Festive Discount (10%):</strong> Rs. ${discountAmount} <br>
+      <strong>Amount to Pay:</strong> Rs. ${finalAmount}
+    `;
+
+    document.getElementById("bookingDetails").innerHTML = bookingInfo;
+  </script>
+
+</body>
+</html>
