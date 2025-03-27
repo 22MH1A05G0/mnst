@@ -1,0 +1,31 @@
+<h3>Using for loop</h3>
+<p id="forOutput"></p>
+
+<script>
+  const seats = 4; // Change to try different values
+  const pricePerTicket = 9;
+  let totalCost = 0;
+  let discount = 0;
+
+  if (seats <= 2) {
+    totalCost = seats * pricePerTicket;
+    document.getElementById("forOutput").innerHTML =
+      `Total Cost: $${totalCost} (No discount)`;
+  } else if (seats >= 6) {
+    document.getElementById("forOutput").innerHTML =
+      `Booking not allowed for ${seats} seats.`;
+  } else {
+    totalCost = seats * pricePerTicket;
+
+    // Calculate discount using for loop
+    for (let i = 3, percent = 5; i <= seats; i++, percent += 2) {
+      discount = percent;
+    }
+
+    const discountAmount = (totalCost * discount) / 100;
+    const finalCost = totalCost - discountAmount;
+
+    document.getElementById("forOutput").innerHTML =
+      `Total Cost: $${totalCost}<br>Discount: ${discount}% ($${discountAmount.toFixed(2)})<br>Final Cost: $${finalCost.toFixed(2)}`;
+  }
+</script>
