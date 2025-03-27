@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Theatre Ticket Booking</title>
+</head>
+<body>
+
+  <h2>Theatre Ticket Booking</h2>
+
+  <!-- Input box for number of seats -->
+  <label for="seats">Enter number of seats to book:</label>
+  <input type="number" id="seats" min="1" max="10">
+  <button onclick="bookTickets()">Book Now</button>
+
+  <p id="result"></p>
+
+  <script>
+    function bookTickets() {
+      // Step 1: Get user input
+      const numberOfSeats = parseInt(document.getElementById("seats").value);
+      const ticketPrice = 9;
+      let totalPrice = 0;
+      let discount = 0;
+      let finalPrice = 0;
+      let message = "";
+
+      // Step 2: Logic based on seat count
+      if (numberOfSeats <= 0 || isNaN(numberOfSeats)) {
+        message = "Please enter a valid number of seats.";
+      } else if (numberOfSeats <= 2) {
+        totalPrice = numberOfSeats * ticketPrice;
+        message = `
+          Booking successful!<br>
+          Number of Seats: ${numberOfSeats}<br>
+          Price per Ticket: $${ticketPrice}<br>
+          Total Price: $${totalPrice} (No discount)
+        `;
+      } else if (numberOfSeats >= 5) {
+        message = `Booking not allowed for ${numberOfSeats} seats. Maximum allowed is 4.`;
+      } else {
+        // Seats are either 3 or 4 → apply discount
+        if (numberOfSeats === 3) discount = 5;
+        else if (numberOfSeats === 4) discount = 7;
+
+        totalPrice = numberOfSeats * ticketPrice;
+        const discountAmount = (totalPrice * discount) / 100;
+        finalPrice = totalPrice - discountAmount;
+
+        message = `
+          Booking successful with discount!<br>
+          Number of Seats: ${numberOfSeats}<br>
+          Price per Ticket: $${ticketPrice}<br>
+          Total Price: $${totalPrice}<br>
+          Discount: ${discount}% ($${discountAmount.toFixed(2)})<br>
+          Final Amount to Pay: $${finalPrice.toFixed(2)}
+        `;
+      }
+
+      // Step 3: Show result
+      document.getElementById("result").innerHTML = message;
+    }
+  </script>
+
+</body>
+</html>
