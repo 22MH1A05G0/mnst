@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Circle Area Calculator</title>
+</head>
+<body>
+  <h2>Circle Area Calculator</h2>
+
+  <p id="varResult"></p>
+  <p id="letResult"></p>
+
+  <script>
+    // Using var
+    var radius = 5;
+    const PI = 3.14159;
+
+    var areaWithVar = PI * radius * radius;
+    document.getElementById("varResult").innerHTML =
+      "Using var - Initial radius: " + radius + ", Area: " + areaWithVar;
+
+    // Reassigning radius declared with var
+    radius = 7;
+    areaWithVar = PI * radius * radius;
+    document.getElementById("varResult").innerHTML +=
+      "<br>Using var - After changing radius to 7, Area: " + areaWithVar;
+
+    // Using let
+    let radiusLet = 6;
+    const PI2 = 3.14159;
+
+    let areaWithLet = PI2 * radiusLet * radiusLet;
+    document.getElementById("letResult").innerHTML =
+      "Using let - Initial radius: " + radiusLet + ", Area: " + areaWithLet;
+
+    // Reassigning radius declared with let
+    radiusLet = 8;
+    areaWithLet = PI2 * radiusLet * radiusLet;
+    document.getElementById("letResult").innerHTML +=
+      "<br>Using let - After changing radius to 8, Area: " + areaWithLet;
+  </script>
+</body>
+</html>
